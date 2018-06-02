@@ -5,7 +5,7 @@
 
 \section*{Intro}
 \begin{itemize}
-\item LOCO-I~\cite{Weinberger96} ({\sl LOw COmplexity, context-based,
+\item LOCO-I~\cite{weinberger96} ({\sl LOw COmplexity, context-based,
     lossless Image compression algorithm}), also named JPEG-LS (Joint
   Photographic Expert Group - LosslesS), is a lossless stil image
   codec based on context-based predictive coding and Golomb Coding.
@@ -42,12 +42,9 @@ found.
 \item {\bf Determination of the prediction context} ${\cal Q}$:
   \begin{enumerate}
   \item Compute the local gradient:
-    \begin{center}
-      % \resizebox{3cm}{!}{\input{../figs/LOCO-I_contexto_prediccion}}
-      % \texfigure{3cm}{!}{../figs/LOCO-I_contexto_prediccion}
-      \includegraphics[width=3cm]{LOCO-I_contexto_prediccion}
-    \end{center}
-    
+
+    \fig{100}{LOCO-I_contexto_prediccion.png}
+
     \begin{displaymath}
       \begin{array}{rcl}
         g_1 & \leftarrow & d-a\\
@@ -60,11 +57,11 @@ found.
     \begin{displaymath}
       q_i\leftarrow\left\{
         \begin{array}{ll}
-          0 & \mathrm{if~} g_i=0\\
-          1 & \mathrm{if~} 1\le |g_i|\le 2\\
-          2 & \mathrm{if~} 3\le |g_i|\le 6\\
-          3 & \mathrm{if~} 7\le |g_i|\le 14\\
-          4 & \mathrm{otherwise}
+          0 & \text{if~} g_i=0\\
+          1 & \text{if~} 1\le |g_i|\le 2\\
+          2 & \text{if~} 3\le |g_i|\le 6\\
+          3 & \text{if~} 7\le |g_i|\le 14\\
+          4 & \text{otherwise}
         \end{array}
       \right.
     \end{displaymath}
@@ -72,9 +69,9 @@ found.
     \begin{displaymath}
       q_4\leftarrow\left\{
         \begin{array}{ll}
-          0 & \mathrm{if~} |g_4|<0\\
-          1 & \mathrm{if~} 5\le g_4\\
-          2 & \mathrm{otherwise}.
+          0 & \text{if~} |g_4|<0\\
+          1 & \text{if~} 5\le g_4\\
+          2 & \text{otherwise}.
         \end{array}
       \right.
     \end{displaymath}
@@ -86,9 +83,9 @@ found.
     \begin{displaymath}
       \hat{s}\leftarrow\left\{
         \begin{array}{ll}
-          \mathrm{min}(a,b) & \mathrm{if~} c\geq\mathrm{max}(a,b) \\
-          \mathrm{max}(a,b) & \mathrm{if~} c\leq\mathrm{min}(a,b) \\
-          a+b-c             & \mathrm{otherwise}.
+          \text{min}(a,b) & \text{if~} c\geq\text{max}(a,b) \\
+          \text{max}(a,b) & \text{if~} c\leq\text{min}(a,b) \\
+          a+b-c             & \text{otherwise}.
         \end{array}
       \right.
     \end{displaymath}
@@ -97,15 +94,15 @@ found.
     \begin{displaymath}
       \hat{s}\leftarrow\left\{
         \begin{array}{ll}
-          \hat{s}+C[Q] & \mathrm{if~} g_1>0 \\
-          \hat{s}-C[Q] & \mathrm{otherwise}.
+          \hat{s}+C[Q] & \text{if~} g_1>0 \\
+          \hat{s}-C[Q] & \text{otherwise}.
         \end{array}
       \right.
     \end{displaymath}
     
   \item Compute the prediction error:
     \begin{displaymath}
-      e\leftarrow(s-\hat{s}) \mathrm{~mod~}\beta,
+      e\leftarrow(s-\hat{s}) \text{~mod~}\beta,
     \end{displaymath}
     where $\beta$ is the number of bits/pixel. This produces a
     projection of the residues from the dynamic range
@@ -118,8 +115,8 @@ found.
     \begin{displaymath}
       M(e)\leftarrow\left\{
         \begin{array}{ll}
-          2e & \mathrm{if~} e\ge 0\\
-          2|e|-1 & \mathrm{otherwise}.
+          2e & \text{if~} e\ge 0\\
+          2|e|-1 & \text{otherwise}.
         \end{array}
       \right.
     \end{displaymath}
@@ -177,7 +174,7 @@ found.
   \end{enumerate}
 \end{enumerate}
 
-\section{Descoder}
+\section{Decoder}
 \begin{enumerate}
 \item Idem to Step 1 of the encoder.
 \item Idem to Step 2 of the encoder.
@@ -188,8 +185,8 @@ found.
   \begin{displaymath}
     \hat{s}\leftarrow\left\{
       \begin{array}{ll}
-        \hat{s}-C[Q] & \mathrm{if~} g_1>0 \\
-        \hat{s}+C[Q] & \mathrm{otherwise}.
+        \hat{s}-C[Q] & \text{if~} g_1>0 \\
+        \hat{s}+C[Q] & \text{otherwise}.
       \end{array}
     \right.
   \end{displaymath}
@@ -197,12 +194,12 @@ found.
   \begin{displaymath}
     e\leftarrow M^{-1}(M(e))=\left\{
       \begin{array}{ll}
-        -M(e)/2-1 & \mathrm{si~} M(e) \mathrm{is~odd}\\
-        M(e)/2 & \mathrm{otherwise}.
+        -M(e)/2-1 & \text{si~} M(e) \text{is~odd}\\
+        M(e)/2 & \text{otherwise}.
       \end{array}
     \right.
   \end{displaymath}
-\item $s\leftarrow (e+\hat{s})\mathrm{~mod~}\beta$.
+\item $s\leftarrow (e+\hat{s})\text{~mod~}\beta$.
 \item Update $Q$ as in Step 5 of the encoder.
 \end{enumerate}
 
@@ -228,5 +225,4 @@ LOCO-I |
 \end{verbatim}
 \end{itemize}
 
-\bibliographystyle{plain}
 \bibliography{JPEG2000}
